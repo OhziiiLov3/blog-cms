@@ -5,55 +5,41 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import logo from "../assets/images/postme-2.svg";
-import ToggleTheme from "./ToggleTheme"; 
+import ToggleTheme from "./ToggleTheme";
 import LoginButton from "./LoginButton";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 text-black dark:text-white px-4 py-4 transition duration-300">
+    <nav className="bg-white dark:bg-gray-900 text-black dark:text-white px-4 py-4 transition-all duration-300">
       <div className="flex justify-between items-center w-full">
         {/* Logo */}
-        <div className="flex items-center space-x-1">
-          <Link href="/" className="flex items-center space-x-1">
-            <Image src={logo} width={50} height={50} alt="postMe logo" priority />
-            <h1 className="text-3xl font-bold dark:text-white text-gray-900">postMe</h1>
-          </Link>
-        </div>
+        <Link href="/" className="flex items-center space-x-1">
+          <Image src={logo} width={50} height={50} alt="postMe logo" priority />
+          <h1 className="text-3xl font-bold dark:text-white text-gray-900">postMe</h1>
+        </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-6">
-          <ul className="flex space-x-6">
-            {["Home", "Blog", "Chat", "About"].map((item) => (
-              <li key={item} className="relative group">
-                <Link
-                  href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  className="text-gray-800 font-extrabold dark:text-gray-300 hover:text-blue-400 dark:hover:text-blue-400 transition duration-300 font-medium"
-                >
-                  {item}
-                </Link>
-                <span className="absolute left-0 bottom-0 w-full h-[2px] bg-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-              </li>
-            ))}
-          </ul>
+          {["Home", "Blog", "Chat", "About"].map((item) => (
+            <Link
+              key={item}
+              href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              className="text-gray-800 font-bold dark:text-gray-300 hover:text-blue-400 dark:hover:text-blue-400 transition duration-300 font-medium"
+            >
+              {item}
+            </Link>
+          ))}
 
-          {/* Search Icon */}
-          <button className="text-gray-800 dark:text-gray-300 hover:text-blue-400">
-            <FiSearch size={22} />
-          </button>
+          <FiSearch size={22} className="cursor-pointer text-gray-800 dark:text-gray-300 hover:text-blue-400" />
 
-          {/* Theme Toggle */}
           <ToggleTheme />
-          {/* Login Button */}
-          <LoginButton/>
+          <LoginButton />
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-700 dark:text-gray-300"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        {/* Mobile Menu Toggle */}
+        <button className="md:hidden text-gray-700 dark:text-gray-300" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       </div>
@@ -74,19 +60,9 @@ const Navbar = () => {
               </li>
             ))}
             <li>
-              <Link
-                href="/login"
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300"
-              >
-                Login
-              </Link>
+              <LoginButton />
             </li>
           </ul>
-
-          {/* Theme Toggle in Mobile Menu */}
-          <div className="flex justify-center mt-4">
-            <ToggleTheme />
-          </div>
         </div>
       )}
     </nav>
@@ -94,3 +70,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
