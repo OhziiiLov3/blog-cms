@@ -47,6 +47,14 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
         <form>
           <div className="mb-4">
+            <label className="block text-gray-700 font-semibold">Name</label>
+            <input
+              type="name"
+              className="w-full text-gray-800 p-2 border rounded-lg cursor-pointer"
+              placeholder="Enter your name"
+            />
+          </div>
+          <div className="mb-4">
             <label className="block text-gray-700 font-semibold">Email</label>
             <input
               type="email"
